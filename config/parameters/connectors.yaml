@@ -1,0 +1,16 @@
+parameters:
+  kafka_connector.parameters.attribute:
+    connector.class: "io.confluent.connect.jdbc.JdbcSourceConnector"
+    key.converter: "org.apache.kafka.connect.json.JsonConverter"
+    key.converter.schemas.enable: "false"
+    value.converter: "org.apache.kafka.connect.json.JsonConverter"
+    value.converter.schemas.enable: "false"
+    batch.max.rows: "500"
+    connection.url: "jdbc:mysql://localhost:3306/kcs"
+    connection.user: '%env(resolve:DATABASE_USER)%'
+    connection.password: '%env(resolve:DATABASE_PASSWORD)%'
+    table.whitelist: "attribute"
+    mode: "incrementing"
+    incrementing.column.name: "id"
+    topic.prefix: "connect-"
+    poll.interval.ms: "3600"
