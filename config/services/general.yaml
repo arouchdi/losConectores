@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: false
+
+  GuzzleHttp\Client: ~
+
+  api.client:
+    class: App\Application\Api\Client

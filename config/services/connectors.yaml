@@ -1,0 +1,26 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: false
+
+  kafka_connector.mysql_table.attribute.request_performer:
+    class: App\Application\Api\RequestPerformer
+    arguments:
+      $client: '@api.client'
+
+  App\Application\Api\ConnectorRequest:
+    arguments:
+      $parameters: '%kafka_connector.parameters.attribute%'
+
+  kafka_connector.mysql_table.attribute.connector_request:
+    class: App\Application\Api\ConnectorRequest
+    arguments:
+      $parameters: '%kafka_connector.parameters.attribute%'
+
+  kafka_connector.mysql_table.attribute.connector_command:
+    class: App\Command\KafkaConnect
+    arguments:
+      $requestPerformer: '@kafka_connector.mysql_table.attribute.request_performer'
+      $name: 'attribute_connector_command'
+    tags: ['console.command']
