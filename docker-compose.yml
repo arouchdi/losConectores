@@ -88,6 +88,18 @@ services:
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
+    command:
+      - /bin/bash
+      - -c
+      - |
+        # JDBC Drivers
+        # ------------
+        # MySQL
+        cd /usr/share/java/kafka-connect-jdbc/
+        curl https://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-8.0.19.tar.gz | tar xz
+        # Now launch Kafka Connect
+        sleep infinity &
+        /etc/confluent/docker/run
     depends_on:
       - "kafka"
       - "schema-registry"
