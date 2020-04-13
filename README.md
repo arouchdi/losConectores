@@ -1,6 +1,6 @@
-# kafka-connect-sample
+# losConectores
 
-kafka-connect-sample is an symfony application used for the creation and management of source and sink __kafka Connect__
+losConectores is an symfony application used for the creation and management of source and sink __kafka Connect__
 connectors.
 
 ## Requirements
