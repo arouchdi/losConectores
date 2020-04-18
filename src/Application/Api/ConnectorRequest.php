@@ -43,41 +43,11 @@ class ConnectorRequest implements RequestInterface
         return 'application/json';
     }
 
-//    private function getBody(): string
-//    {
-//        return json_encode([
-//            $this->parameters
-//        ]);
-//    }
-
     private function getBody(): string
     {
         return json_encode([
             'name' => $this->name,
-            'config' => $this->getConfigParameters()
+            'config' => $this->parameters
         ]);
-    }
-
-    /**
-     * @return mixed[]
-     */
-    private function getConfigParameters(): array
-    {
-        return [
-            "connector.class"=> "io.confluent.connect.jdbc.JdbcSourceConnector",
-            "key.converter"=> "org.apache.kafka.connect.json.JsonConverter",
-            "key.converter.schemas.enable"=> "false",
-            "value.converter"=> "org.apache.kafka.connect.json.JsonConverter",
-            "value.converter.schemas.enable"=> "false",
-            "batch.max.rows"=> "500",
-            "connection.url"=> "jdbc:mysql://db:3306/kcs",
-            "connection.user"=> "dev",
-            "connection.password"=> "dev",
-            "table.whitelist"=> "attribute",
-            "mode"=> "incrementing",
-            "incrementing.column.name"=> "id",
-            "topic.prefix"=> "connect-",
-            "poll.interval.ms"=> "3600",
-        ];
     }
 }

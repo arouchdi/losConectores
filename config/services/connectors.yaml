@@ -8,10 +8,7 @@ services:
     class: App\Application\Api\RequestPerformer
     arguments:
       $client: '@api.client'
-
-  App\Application\Api\ConnectorRequest:
-    arguments:
-      $parameters: '%kafka_connector.parameters.attribute%'
+      $request: '@kafka_connector.mysql_table.attribute.connector_request'
 
   kafka_connector.mysql_table.attribute.connector_request:
     class: App\Application\Api\ConnectorRequest
